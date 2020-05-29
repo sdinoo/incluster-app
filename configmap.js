@@ -8,25 +8,29 @@ try {
 client = new kubernetes.Client({ config })
 
 
+let myFirstPromise = new Promise((resolve, reject) => {
+    client.loadSpec()
 
-    (async function () {
-        await client.loadSpec()
-        let apiRes
-        if (client.apis.apps.v1) {
-            apiRes = await client.apis
-                .apps
-                .v1
-                .namespaces(req.params.namespace)
-                .deployments(req.params.deployment)
-                .get()
-        } else {
-            apiRes = await client.apis
-                .extensions
-                .v1beta1
-                .namespaces(req.params.namespace)
-                .deployments(req.params.deployment)
-                .get()
-        }
+}).then((successMessage) => {
 
-        console.log("API RES BODY", apiRes.body);
-    })()
+    let apiRes
+    if (client.apis.apps.v1) {
+        client.apis
+            .apps
+            .v1
+            .namespaces(req.params.namespace)
+            .deployments(req.params.deployment)
+            .get().then((apiRes) => {
+                console.log("API RES BODY", apiRes.body);
+            })
+    } else {
+        client.apis
+            .extensions
+            .v1beta1
+            .namespaces(req.params.namespace)
+            .deployments(req.params.deployment)
+            .get().then((apiRes) => {
+                console.log("API RES BODY", apiRes.body);
+            })
+    }
+});
