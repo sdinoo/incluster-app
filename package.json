@@ -1,0 +1,11 @@
+{
+  "name": "incluster-app",
+  "version": "1.0.0",
+  "description": "Test Application",
+  "main": "server.js",
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "test": "start"
+  }
+}
