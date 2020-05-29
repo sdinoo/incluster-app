@@ -9,11 +9,17 @@ client = new kubernetes.Client({ config })
 
 
 let myFirstPromise = new Promise((resolve, reject) => {
-    client.loadSpec()
+    
+    try {
+        client.loadSpec();    
+        resolve();
+    } catch (error) {
+        reject(error);    
+    }
     console.log("loading spec ...");
-
+    
 }).then(() => {
-    console.log("inside then ...")
+    console.log("inside then ...");
     let apiRes
     if (client.apis.apps.v1) {
         client.apis
