@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "description": "Test Application",
   "main": "server.js",
-  "dependencies": {},
+  "dependencies": {
+    "@kubernetes/client-node": "^0.12.0"
+  },
   "devDependencies": {},
   "scripts": {
-    "test": "start"
   }
 }
