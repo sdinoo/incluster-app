@@ -8,6 +8,6 @@
     "kubernetes-client": "^9.0.0"
   },
   "scripts": {
-    "start": "node configmap.js"
+    "start": "node server.js"
   }
 }
