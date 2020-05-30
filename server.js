@@ -1,14 +1,14 @@
 const k8s = require('@kubernetes/client-node');
-
 const kc = new k8s.KubeConfig();
-kc.loadFromCluster();
+// kc.loadFromCluster();
+kc.loadFromDefault();
 const k8sApi = kc.makeApiClient(k8s.CoreV1Api);
-// This is a new comment i want to see get pushed into github
-k8sApi.listNamespacedPod('api-hub-operator-project')
-    .then((res) => {
-	console.log(res.body);
-    })
-    .catch((err) => {
-        console.log(err);
-    });
-    
+k8sApi.listNamespacedConfigMap('default').then((res) => {
+    // console.log("configmaps: ", res.body.items);
+    for (const configmap of res.body.items) {
+        console.log("", configmap.data)
+    }
+})
+.catch((err) => {
+    console.log("error: ", err);
+});
